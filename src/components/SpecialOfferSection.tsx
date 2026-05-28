@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const offers = [
   {
@@ -12,7 +13,7 @@ const offers = [
     originalPrice: "₹4,299",
     validUntil: "2025-01-31",
     badge: "LIMITED",
-    image: "https://images.unsplash.com/photo-1584622654111-d36343687d26?w=400&h=300&fit=crop",
+    image: "https://loremflickr.com/800/600/deep,cleaner",
   },
   {
     id: 2,
@@ -20,7 +21,7 @@ const offers = [
     description: "Free sanitization with any service booking",
     price: "FREE",
     badge: "NEW",
-    image: "https://images.unsplash.com/photo-1519710164236-cd02ccd2a374?w=400&h=300&fit=crop",
+    image: "https://loremflickr.com/800/600/sanitization",
   },
   {
     id: 3,
@@ -28,7 +29,7 @@ const offers = [
     description: "Special packages for Onam & Eid celebrations",
     price: "From ₹1,499",
     badge: "FESTIVE",
-    image: "https://images.unsplash.com/photo-1556912999-5e1b3f0a3cbd?w=400&h=300&fit=crop",
+    image: "https://loremflickr.com/800/600/festival,cleaning",
   },
   {
     id: 4,
@@ -36,7 +37,7 @@ const offers = [
     description: "25% off on your first service",
     price: "25% OFF",
     badge: "WELCOME",
-    image: "https://images.unsplash.com/photo-1581578735186-35cbd6a56c4b?w=400&h=300&fit=crop",
+    image: "https://loremflickr.com/800/600/welcome,cleaning",
   },
 ];
 
@@ -85,11 +86,11 @@ export default function SpecialOfferSection() {
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
-                  <div className="w-16 h-16 bg-accent-gold rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-secondary-900 font-bold text-xs">{offer.badge}</span>
+                  <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-gray-900 font-bold text-xs">{offer.badge}</span>
                   </div>
                   <motion.div
-                    className="absolute inset-0 rounded-full border-2 border-accent-gold"
+                    className="absolute inset-0 rounded-full border-2 border-yellow-400"
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
@@ -98,10 +99,12 @@ export default function SpecialOfferSection() {
 
               <div className="glass-dark rounded-2xl overflow-hidden h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
                 <div className="relative h-40 overflow-hidden">
-                  <img
+                  <Image
                     src={offer.image}
                     alt={offer.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 to-transparent" />
                 </div>

@@ -4,11 +4,12 @@ import PremiumNavbar from "@/components/PremiumNavbar";
 import PremiumFooter from "@/components/PremiumFooter";
 import { motion } from "framer-motion";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const galleryItems = [
-  { id: 1, title: "Home Deep Clean", image: "https://images.unsplash.com/photo-1584622654111-d36343687d26?w=300&h=200&fit=crop" },
-  { id: 2, title: "Office Cleaning", image: "https://images.unsplash.com/photo-1497366216507-2b8d6632a094?w=300&h=200&fit=crop" },
-  { id: 3, title: "Kitchen Sanitization", image: "https://images.unsplash.com/photo-1556912999-5e1b3f0a3cbd?w=300&h=200&fit=crop" },
+  { id: 1, title: "Home Deep Clean", image: "https://loremflickr.com/800/600/cleaning?lock=2" },
+  { id: 2, title: "Office Cleaning", image: "https://loremflickr.com/800/600/cleaning?lock=3" },
+  { id: 3, title: "Kitchen Sanitization", image: "https://loremflickr.com/800/600/cleaning?lock=4" },
 ];
 
 export default function AdminGallery() {
@@ -44,12 +45,14 @@ export default function AdminGallery() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="group relative rounded-xl overflow-hidden shadow-lg"
+                  className="group relative h-40 rounded-xl overflow-hidden shadow-lg"
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
                     <span className="text-white text-xs font-medium">{item.title}</span>

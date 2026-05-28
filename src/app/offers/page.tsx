@@ -4,6 +4,7 @@ import PremiumNavbar from "@/components/PremiumNavbar";
 import PremiumFooter from "@/components/PremiumFooter";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const offers = [
   {
@@ -14,7 +15,7 @@ const offers = [
     originalPrice: 2999,
     validUntil: "2025-02-28",
     tag: "NEW YEAR",
-    image: "https://images.unsplash.com/photo-1512901023466-207c320e8406?w=600&h=400&fit=crop",
+    image: "https://loremflickr.com/800/600/cleaning?lock=22",
   },
   {
     id: 2,
@@ -24,7 +25,7 @@ const offers = [
     originalPrice: 3499,
     validUntil: "2025-02-15",
     tag: "ONAM",
-    image: "https://images.unsplash.com/photo-1609024399510-3ddd4b6c6dfb?w=600&h=400&fit=crop",
+    image: "https://loremflickr.com/800/600/cleaning?lock=23",
   },
   {
     id: 3,
@@ -34,7 +35,7 @@ const offers = [
     originalPrice: 4299,
     validUntil: "2025-02-28",
     tag: "EID",
-    image: "https://images.unsplash.com/photo-1556912999-5e1b3f0a3cbd?w=600&h=400&fit=crop",
+    image: "https://loremflickr.com/800/600/cleaning?lock=24",
   },
 ];
 
@@ -72,7 +73,7 @@ export default function Offers() {
 
                 <div className="glass-dark rounded-2xl overflow-hidden shadow-xl h-full flex flex-col">
                   <div className="relative h-48 overflow-hidden">
-                    <img src={offer.image} alt={offer.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <Image src={offer.image} alt={offer.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 to-transparent" />
                     <span className="absolute top-4 left-4 px-3 py-1 bg-primary-600 text-white text-xs font-bold rounded-full">
                       {offer.tag}

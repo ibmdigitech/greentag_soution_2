@@ -5,6 +5,7 @@ import PremiumHero from "@/components/PremiumHero";
 import SpecialOfferSection from "@/components/SpecialOfferSection";
 import FestivalOfferSection from "@/components/FestivalOfferSection";
 import PremiumServicesSection from "@/components/PremiumServicesSection";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import PremiumFooter from "@/components/PremiumFooter";
 import { motion } from "framer-motion";
 
@@ -21,6 +22,8 @@ export default function Home() {
         <FestivalOfferSection />
         
         <PremiumServicesSection />
+
+        <GoogleReviewsSection />
 
         <section className="py-20 px-4 bg-white dark:bg-secondary-900">
           <div className="max-w-7xl mx-auto">

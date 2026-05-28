@@ -31,6 +31,7 @@ export default function PremiumNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -42,29 +43,37 @@ export default function PremiumNavbar() {
   }, []);
 
   useEffect(() => {
+    setMounted(true);
     const theme = localStorage.getItem("theme");
     if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    if (newDarkMode) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
+
+  const isHomePage = pathname === "/";
+  const navSolid = isScrolled || !isHomePage;
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
+          navSolid 
             ? "bg-white/80 dark:bg-secondary-900/80 backdrop-blur-lg shadow-lg dark:shadow-secondary-800/20" 
             : "bg-transparent"
         }`}
@@ -80,21 +89,21 @@ export default function PremiumNavbar() {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
-              <span className={`text-xl font-bold ${isScrolled ? "text-primary-600 dark:text-primary-400" : "text-white"}`}>
+              <span className={`text-xl font-bold ${navSolid ? "text-primary-600 dark:text-primary-400" : "text-white"}`}>
                 Green Tag Solutions
               </span>
             </Link>
 
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-5 xl:space-x-7">
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative text-sm font-medium transition-colors ${
+                  className={`relative text-sm font-semibold transition-colors ${
                     pathname === item.href
-                      ? isScrolled ? "text-primary-600" : "text-primary-400"
-                      : isScrolled ? "text-gray-700 dark:text-gray-300" : "text-white/90"
-                  } hover:${isScrolled ? "text-primary-600" : "text-white"}`}
+                      ? navSolid ? "text-primary-600" : "text-primary-400"
+                      : navSolid ? "text-gray-700 dark:text-gray-300" : "text-white/90"
+                  } hover:${navSolid ? "text-primary-600" : "text-white"}`}
                 >
                   {item.name}
                   {pathname === item.href && (
@@ -107,46 +116,71 @@ export default function PremiumNavbar() {
               ))}
             </div>
 
-            <div className="hidden lg:flex items-center space-x-4">
+
+            <div className="hidden lg:flex items-center space-x-2.5 xl:space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full bg-white/10 dark:bg-secondary-800/50 backdrop-blur hover:bg-white/20 dark:hover:bg-secondary-700/50 transition"
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  navSolid
+                    ? "bg-gray-100 text-gray-700 hover:bg-gray-250 dark:bg-secondary-800/80 dark:text-gray-300 dark:hover:bg-secondary-700"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                } border border-gray-200/10 dark:border-secondary-700/20 shadow-sm`}
                 aria-label="Toggle dark mode"
               >
-                <AnimatePresence mode="wait">
-                  {isDarkMode ? (
-                    <motion.div key="sun" initial={{ rotate: -90 }} animate={{ rotate: 0 }} exit={{ rotate: 90 }}>
-                      <SunIcon className="w-5 h-5 text-yellow-400" />
+                <div className="relative w-5 h-5 flex items-center justify-center">
+                  {!mounted ? (
+                    <MoonIcon className="w-5 h-5" />
+                  ) : isDarkMode ? (
+                    <motion.div
+                      key="sun"
+                      initial={{ scale: 0, rotate: -90 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    >
+                      <SunIcon className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
                     </motion.div>
                   ) : (
-                    <motion.div key="moon" initial={{ rotate: -90 }} animate={{ rotate: 0 }} exit={{ rotate: 90 }}>
-                      <MoonIcon className="w-5 h-5 text-gray-700" />
+                    <motion.div
+                      key="moon"
+                      initial={{ scale: 0, rotate: 90 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                    >
+                      <MoonIcon className="w-5 h-5 text-indigo-550 dark:text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
                     </motion.div>
                   )}
-                </AnimatePresence>
+                </div>
               </button>
 
               <Link
                 href="/cart"
-                className="relative p-2 rounded-full bg-white/10 dark:bg-secondary-800/50 backdrop-blur hover:bg-white/20 dark:hover:bg-secondary-700/50 transition"
+                className={`relative p-2 rounded-full transition-all duration-300 ${
+                  navSolid
+                    ? "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-secondary-800/80 dark:text-gray-300 dark:hover:bg-secondary-700"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                }`}
               >
-                <ShoppingCartIcon className={`w-5 h-5 ${isScrolled ? "text-gray-700" : "text-white"}`} />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white text-xs rounded-full flex items-center justify-center">0</span>
+                <ShoppingCartIcon className="w-5 h-5" />
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white text-xs rounded-full flex items-center justify-center font-semibold">0</span>
               </Link>
 
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-5 py-2.5 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 transition transform hover:scale-105 shadow-lg hover:shadow-primary-600/30"
+                className="inline-flex items-center px-4 py-2 xl:px-5 xl:py-2.5 text-xs xl:text-sm bg-green-600 hover:bg-green-700 dark:bg-primary-600 dark:hover:bg-primary-700 text-white font-semibold rounded-full transition transform hover:scale-105 shadow-lg shadow-green-600/20 dark:shadow-primary-600/20"
               >
-                <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />
+                <ChatBubbleLeftRightIcon className="w-4 h-4 mr-1.5 xl:mr-2 animate-bounce" />
                 WhatsApp Order
               </a>
 
               <Link
                 href="/request-quote"
-                className="inline-flex items-center px-5 py-2.5 bg-white/10 dark:bg-secondary-800/50 backdrop-blur text-white font-semibold rounded-full hover:bg-white/20 dark:hover:bg-secondary-700/50 transition transform hover:scale-105 border border-white/20"
+                className={`hidden xl:inline-flex items-center px-5 py-2.5 font-semibold rounded-full transition transform hover:scale-105 duration-300 ${
+                  navSolid
+                    ? "bg-primary-50 text-primary-600 hover:bg-primary-100 dark:bg-secondary-850 dark:text-primary-400 dark:hover:bg-secondary-800 border border-primary-200/50 dark:border-secondary-700/50"
+                    : "bg-white/10 backdrop-blur text-white hover:bg-white/20 border border-white/20"
+                }`}
               >
                 Book Cleaning
               </Link>
@@ -154,16 +188,16 @@ export default function PremiumNavbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-white/10 dark:hover:bg-secondary-800/50 transition"
+              className={`lg:hidden p-2 rounded-lg transition ${navSolid ? 'hover:bg-gray-100 dark:hover:bg-secondary-800/50' : 'hover:bg-white/10'}`}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
                   <motion.div key="close" initial={{ rotate: 90 }} animate={{ rotate: 0 }} exit={{ rotate: -90 }}>
-                    <XMarkIcon className={`w-6 h-6 ${isScrolled ? "text-gray-700" : "text-white"}`} />
+                    <XMarkIcon className={`w-6 h-6 ${navSolid ? "text-gray-700 dark:text-white" : "text-white"}`} />
                   </motion.div>
                 ) : (
                   <motion.div key="menu" initial={{ rotate: -90 }} animate={{ rotate: 0 }} exit={{ rotate: 90 }}>
-                    <Bars3Icon className={`w-6 h-6 ${isScrolled ? "text-gray-700" : "text-white"}`} />
+                    <Bars3Icon className={`w-6 h-6 ${navSolid ? "text-gray-700 dark:text-white" : "text-white"}`} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -203,24 +237,39 @@ export default function PremiumNavbar() {
                 <div className="pt-4 border-t border-gray-200 dark:border-secondary-700 space-y-3">
                   <button
                     onClick={toggleDarkMode}
-                    className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-secondary-800"
+                    className="flex items-center justify-between w-full px-4 py-3.5 rounded-xl text-sm font-semibold text-gray-750 dark:text-gray-250 bg-gray-50 dark:bg-secondary-800/80 border border-gray-150 dark:border-secondary-700/60 hover:bg-gray-100 dark:hover:bg-secondary-750 transition duration-300 shadow-sm"
                   >
-                    {isDarkMode ? <SunIcon className="w-4 h-4 mr-2" /> : <MoonIcon className="w-4 h-4 mr-2" />}
-                    {isDarkMode ? "Light Mode" : "Dark Mode"}
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-1.5 rounded-lg bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400">
+                        {!mounted ? (
+                          <MoonIcon className="w-4 h-4" />
+                        ) : isDarkMode ? (
+                          <SunIcon className="w-4 h-4 text-yellow-500" />
+                        ) : (
+                          <MoonIcon className="w-4 h-4 text-indigo-550" />
+                        )}
+                      </div>
+                      <span>Theme Mode</span>
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400 bg-primary-100/50 dark:bg-primary-900/30 px-2.5 py-1 rounded-full">
+                      {!mounted ? "Dark" : isDarkMode ? "Light" : "Dark"}
+                    </span>
                   </button>
+
                   <a
                     href={`https://wa.me/${WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-white bg-primary-600"
+                    className="flex items-center justify-center w-full px-4 py-3.5 rounded-xl text-sm font-semibold text-white bg-green-600 hover:bg-green-700 transition duration-300 shadow-md shadow-green-600/10"
                   >
                     <ChatBubbleLeftRightIcon className="w-4 h-4 mr-2" />
                     WhatsApp Order
                   </a>
+
                   <Link
                     href="/request-quote"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 rounded-lg text-sm font-medium text-center text-white bg-secondary-800 dark:bg-secondary-700"
+                    className="block px-4 py-3.5 rounded-xl text-sm font-semibold text-center text-white bg-primary-600 hover:bg-primary-700 transition duration-300 shadow-md shadow-primary-600/10"
                   >
                     Book Cleaning
                   </Link>

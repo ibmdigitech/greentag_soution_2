@@ -2,26 +2,27 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1581578735186-35cbd6a56c4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+    image: "https://loremflickr.com/800/600/cleaning?lock=58.0.3&auto=format&fit=crop&w=1920&q=80",
     title: "Kerala's Trusted Professional Cleaning Experts",
     subtitle: "Home, Office, School & Service Station Cleaning Services Across Kerala",
   },
   {
-    image: "https://images.unsplash.com/photo-1497366216507-2b8d6632a094?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+    image: "https://loremflickr.com/800/600/cleaning?lock=59.0.3&auto=format&fit=crop&w=1920&q=80",
     title: "Premium Office Cleaning Solutions",
     subtitle: "Commercial spaces, retail stores, and corporate offices sanitized to perfection",
   },
   {
-    image: "https://images.unsplash.com/photo-1580587771520-7d44e5e5a6c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+    image: "https://loremflickr.com/800/600/cleaning?lock=60.0.3&auto=format&fit=crop&w=1920&q=80",
     title: "School & Institutional Cleaning",
     subtitle: "Safe, hygienic environments for learning spaces across Kerala",
   },
   {
-    image: "https://images.unsplash.com/photo-1600566842977-c3d5b8dda868?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+    image: "https://loremflickr.com/800/600/cleaning?lock=61.0.3&auto=format&fit=crop&w=1920&q=80",
     title: "Deep Cleaning & Sanitization",
     subtitle: "Thorough cleaning with eco-friendly products for healthy living",
   },
@@ -45,12 +46,16 @@ export default function PremiumHero() {
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('${heroSlides[currentSlide].image}')`,
-          }}
-        />
+          className="absolute inset-0"
+        >
+          <Image
+            src={heroSlides[currentSlide].image}
+            alt={heroSlides[currentSlide].title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
       </AnimatePresence>
 
       <div className="absolute inset-0 bg-gradient-to-br from-secondary-900/90 via-secondary-900/70 to-primary-600/60" />

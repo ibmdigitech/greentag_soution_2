@@ -5,11 +5,12 @@ import PremiumFooter from "@/components/PremiumFooter";
 import { motion } from "framer-motion";
 import { ShoppingCartIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Cart() {
   const cartItems = [
-    { id: 1, name: "Floor Cleaner 1L", price: 299, quantity: 2, image: "https://images.unsplash.com/photo-1584622654111-d36343687d26?w=100&h=100&fit=crop" },
-    { id: 2, name: "Air Freshener", price: 449, quantity: 1, image: "https://images.unsplash.com/photo-1512901023466-207c320e8406?w=100&h=100&fit=crop" },
+    { id: 1, name: "Floor Cleaner 1L", price: 299, quantity: 2, image: "https://loremflickr.com/800/600/cleaning?lock=8" },
+    { id: 2, name: "Air Freshener", price: 449, quantity: 1, image: "https://loremflickr.com/800/600/cleaning?lock=9" },
   ];
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -73,7 +74,7 @@ export default function Cart() {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center gap-4 p-6 border-b border-white/10 last:border-0"
                     >
-                      <img src={item.image} alt={item.name} className="w-20 h-20 rounded-lg object-cover" />
+                      <Image src={item.image} alt={item.name} width={80} height={80} className="rounded-lg object-cover" />
                       <div className="flex-1">
                         <h4 className="font-bold text-white">{item.name}</h4>
                         <p className="text-gray-300">₹{item.price}</p>
