@@ -13,7 +13,20 @@ const dummyInvoices = [
 ];
 
 export default function AdminInvoices() {
-  const downloadInvoice = (invoice: typeof dummyInvoices[0]) => {
+  const downloadInvoice = async (invoice: typeof dummyInvoices[0]) => {
+    // Fetch logo and convert to base64 so it embeds in the offline HTML blob
+    let logoBase64 = "";
+    try {
+      const res = await fetch("/images/logo.png");
+      const blob = await res.blob();
+      logoBase64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.readAsDataURL(blob);
+      });
+    } catch {
+      // Logo fetch failed — will show text fallback
+    }
     // Generate a premium invoice HTML template
     const cgst = (invoice.amount * 0.09).toFixed(2);
     const sgst = (invoice.amount * 0.09).toFixed(2);
@@ -208,16 +221,16 @@ export default function AdminInvoices() {
   </style>
 </head>
 <body>
-    <div className="invoice-card">
-    <div className="header">
-      <div className="logo-container" style="display: flex; align-items: center; gap: 12px;">
-        <img src="${window.location.origin}/images/logo.png" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;" />
+    <div class="invoice-card">
+    <div class="header">
+      <div class="logo-container" style="display: flex; align-items: center; gap: 12px;">
+        ${logoBase64 ? `<img src="${logoBase64}" alt="Green Tag Logo" style="width: 52px; height: 52px; border-radius: 10px; object-fit: cover; border: 2px solid #d1fae5;" />` : `<div style="width:52px;height:52px;background:#059669;border-radius:10px;display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-weight:900;font-size:18px;">GT</span></div>`}
         <div style="text-align: left;">
-          <span className="logo-text" style="font-size: 20px; font-weight: 800; color: #059669; display: block; line-height: 1; margin: 0;">GREEN TAG</span>
+          <span class="logo-text" style="font-size: 20px; font-weight: 800; color: #059669; display: block; line-height: 1; margin: 0;">GREEN TAG</span>
           <span style="font-size: 11px; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 2px;">Solutions</span>
         </div>
       </div>
-      <div className="company-details">
+      <div class="company-details">
         <p style="margin:0 0 5px 0; font-weight:700; color:#0f172a;">Green Tag Solutions Calicut</p>
         <p style="margin:0;">Calicut, Kerala, India</p>
         <p style="margin:3px 0 0 0;">GSTIN: 32AAAAA1111A1Z1</p>
@@ -225,73 +238,73 @@ export default function AdminInvoices() {
       </div>
     </div>
 
-    <div className="invoice-details">
-      <div className="details-box">
+    <div class="invoice-details">
+      <div class="details-box">
         <h3>Invoice To</h3>
         <p>${invoice.customer}</p>
         <span>Kerala, India</span>
       </div>
-      <div className="details-box" style="text-align: right;">
+      <div class="details-box" style="text-align: right;">
         <h3>Invoice Info</h3>
         <p style="color: #059669; font-size:18px;">${invoice.id}</p>
         <span><strong>Date:</strong> ${invoice.date}</span>
         <span style="margin-top: 5px;">
-          <span className="badge ${invoice.status.toLowerCase()}">${invoice.status}</span>
+          <span class="badge ${invoice.status.toLowerCase()}">${invoice.status}</span>
         </span>
       </div>
     </div>
 
-    <div className="table-container">
+    <div class="table-container">
       <table>
         <thead>
           <tr>
             <th>Description</th>
-            <th className="amount-column">Qty</th>
-            <th className="amount-column">Unit Price</th>
-            <th className="amount-column">Amount</th>
+            <th class="amount-column">Qty</th>
+            <th class="amount-column">Unit Price</th>
+            <th class="amount-column">Amount</th>
           </tr>
         </thead>
         <tbody>
           ${(invoice.items || []).map(item => `
             <tr>
               <td><strong>${item.name}</strong></td>
-              <td className="amount-column">${item.qty}</td>
-              <td className="amount-column">₹${item.price.toFixed(2)}</td>
-              <td className="amount-column">₹${(item.price * item.qty).toFixed(2)}</td>
+              <td class="amount-column">${item.qty}</td>
+              <td class="amount-column">₹${item.price.toFixed(2)}</td>
+              <td class="amount-column">₹${(item.price * item.qty).toFixed(2)}</td>
             </tr>
           `).join('')}
         </tbody>
       </table>
     </div>
 
-    <div className="summary-section">
-      <div className="summary-box">
-        <div className="summary-row">
+    <div class="summary-section">
+      <div class="summary-box">
+        <div class="summary-row">
           <span>Subtotal</span>
           <span>₹${subtotal}</span>
         </div>
-        <div className="summary-row">
+        <div class="summary-row">
           <span>CGST (9%)</span>
           <span>₹${cgst}</span>
         </div>
-        <div className="summary-row">
+        <div class="summary-row">
           <span>SGST (9%)</span>
           <span>₹${sgst}</span>
         </div>
-        <div className="summary-row total">
+        <div class="summary-row total">
           <span>Total Amount</span>
           <span>₹${invoice.amount.toLocaleString()}</span>
         </div>
       </div>
     </div>
 
-    <div className="footer">
+    <div class="footer">
       <p style="margin:0 0 5px 0; font-weight:700;">Thank you for your business!</p>
       <p style="margin:0;">This is a computer-generated invoice. For any inquiries, please contact Support.</p>
     </div>
   </div>
 
-  <button className="print-button" onclick="window.print()">Print / Save PDF</button>
+  <button class="print-button" onclick="window.print()">Print / Save PDF</button>
 </body>
 </html>
     `;
@@ -373,7 +386,7 @@ export default function AdminInvoices() {
                   </td>
                   <td className="py-4 px-6 text-right whitespace-nowrap">
                     <button
-                      onClick={() => downloadInvoice(invoice)}
+                      onClick={() => void downloadInvoice(invoice)}
                       className="px-3.5 py-2 bg-primary-600 hover:bg-primary-750 text-white rounded-xl transition duration-300 inline-flex items-center gap-1.5 text-xs font-bold shadow-md shadow-primary-600/10 active:scale-95 border border-primary-500/30"
                     >
                       <ArrowDownTrayIcon className="w-3.5 h-3.5" />
