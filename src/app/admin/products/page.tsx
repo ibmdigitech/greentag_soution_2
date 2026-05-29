@@ -4,34 +4,7 @@ import PremiumNavbar from "@/components/PremiumNavbar";
 import PremiumFooter from "@/components/PremiumFooter";
 import { motion } from "framer-motion";
 import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-
-const products = [
-  { id: 1, name: "Floor Cleaner Pro 5L", category: "Cleaning Chemicals", price: 450, stock: 50 },
-  { id: 2, name: "Toilet Cleaner Max 1L", category: "Cleaning Chemicals", price: 120, stock: 100 },
-  { id: 3, name: "Glass Cleaner Spray 500ml", category: "Cleaning Chemicals", price: 180, stock: 75 },
-  { id: 4, name: "Kitchen Degreaser 1L", category: "Cleaning Chemicals", price: 250, stock: 40 },
-  { id: 5, name: "Disinfectant Liquid 5L", category: "Cleaning Chemicals", price: 550, stock: 60 },
-  { id: 6, name: "Heavy Duty Mop Set", category: "Cleaning Tools", price: 650, stock: 30 },
-  { id: 7, name: "Microfiber Cloth Pack", category: "Cleaning Tools", price: 220, stock: 80 },
-  { id: 8, name: "Floor Scrub Brush", category: "Cleaning Tools", price: 180, stock: 45 },
-  { id: 9, name: "Window Cleaning Kit", category: "Cleaning Tools", price: 850, stock: 20 },
-  { id: 10, name: "Dust Pan Set", category: "Cleaning Tools", price: 150, stock: 70 },
-  { id: 11, name: "Rubber Cleaning Gloves", category: "Safety Equipment", price: 120, stock: 100 },
-  { id: 12, name: "Face Mask Pack", category: "Safety Equipment", price: 80, stock: 150 },
-  { id: 13, name: "Safety Goggles", category: "Safety Equipment", price: 250, stock: 40 },
-  { id: 14, name: "Cleaning Apron", category: "Safety Equipment", price: 350, stock: 25 },
-  { id: 15, name: "Safety Shoes", category: "Safety Equipment", price: 1200, stock: 15 },
-  { id: 16, name: "Vacuum Cleaner Industrial", category: "Machines", price: 8500, stock: 10 },
-  { id: 17, name: "Pressure Washer Machine", category: "Machines", price: 12500, stock: 5 },
-  { id: 18, name: "Floor Scrubber Machine", category: "Machines", price: 28500, stock: 3 },
-  { id: 19, name: "Steam Cleaning Machine", category: "Machines", price: 9500, stock: 7 },
-  { id: 20, name: "Carpet Cleaning Machine", category: "Machines", price: 18500, stock: 4 },
-  { id: 21, name: "Home Deep Cleaning", category: "Cleaning Service", price: 2999, stock: 999 },
-  { id: 22, name: "Office Cleaning Package", category: "Cleaning Service", price: 4999, stock: 999 },
-  { id: 23, name: "School Cleaning Service", category: "Cleaning Service", price: 7999, stock: 999 },
-  { id: 24, name: "Hospital Sanitization", category: "Cleaning Service", price: 9999, stock: 999 },
-  { id: 25, name: "Petrol Pump Cleaning", category: "Cleaning Service", price: 6999, stock: 999 },
-];
+import { productsData as products } from "@/data/products";
 
 export default function AdminProducts() {
   return (

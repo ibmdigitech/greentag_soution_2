@@ -7,47 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCartIcon, StarIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-
-const categories = [
-  "All",
-  "Cleaning Chemicals",
-  "Cleaning Tools",
-  "Safety Equipment",
-  "Machines",
-  "Cleaning Service",
-];
-
-const products = [
-  { id: 1, name: "Floor Cleaner Pro 5L", category: "Cleaning Chemicals", price: 450, originalPrice: 540, rating: 4.8, image: "/images/products/product-1.jpg", description: "Multi-purpose floor cleaner for homes and offices" },
-  { id: 2, name: "Toilet Cleaner Max 1L", category: "Cleaning Chemicals", price: 120, originalPrice: 150, rating: 4.5, image: "/images/products/product-2.jpg", description: "Strong toilet stain remover with fresh fragrance" },
-  { id: 3, name: "Glass Cleaner Spray 500ml", category: "Cleaning Chemicals", price: 180, originalPrice: 220, rating: 4.6, image: "/images/products/product-3.jpg", description: "Streak-free glass and mirror cleaning solution" },
-  { id: 4, name: "Kitchen Degreaser 1L", category: "Cleaning Chemicals", price: 250, originalPrice: 300, rating: 4.7, image: "/images/products/product-4.jpg", description: "Removes oil and grease from kitchen surfaces" },
-  { id: 5, name: "Disinfectant Liquid 5L", category: "Cleaning Chemicals", price: 550, originalPrice: 650, rating: 4.9, image: "/images/products/product-5.jpg", description: "Hospital-grade disinfectant for all surfaces", badge: "Best Seller" },
-
-  { id: 6, name: "Heavy Duty Mop Set", category: "Cleaning Tools", price: 650, originalPrice: 800, rating: 4.7, image: "/images/products/product-6.jpg", description: "Stainless steel mop with microfiber bucket system" },
-  { id: 7, name: "Microfiber Cloth Pack", category: "Cleaning Tools", price: 220, originalPrice: 280, rating: 4.8, image: "/images/products/product-7.jpg", description: "Reusable dust and cleaning cloth set", badge: "Popular" },
-  { id: 8, name: "Floor Scrub Brush", category: "Cleaning Tools", price: 180, originalPrice: 220, rating: 4.4, image: "/images/products/product-8.jpg", description: "Hard bristle floor scrubbing brush" },
-  { id: 9, name: "Window Cleaning Kit", category: "Cleaning Tools", price: 850, originalPrice: 1000, rating: 4.6, image: "/images/products/product-9.jpg", description: "Complete window cleaning kit with spray and wiper" },
-  { id: 10, name: "Dust Pan Set", category: "Cleaning Tools", price: 150, originalPrice: 190, rating: 4.5, image: "/images/products/product-10.jpg", description: "Durable dust pan with brush set" },
-
-  { id: 11, name: "Rubber Cleaning Gloves", category: "Safety Equipment", price: 120, originalPrice: 150, rating: 4.6, image: "/images/products/product-11.jpg", description: "Chemical-resistant hand gloves" },
-  { id: 12, name: "Face Mask Pack", category: "Safety Equipment", price: 80, originalPrice: 100, rating: 4.7, image: "/images/products/product-12.jpg", description: "Disposable safety face masks" },
-  { id: 13, name: "Safety Goggles", category: "Safety Equipment", price: 250, originalPrice: 300, rating: 4.5, image: "/images/products/product-13.jpg", description: "Eye protection for cleaning staff" },
-  { id: 14, name: "Cleaning Apron", category: "Safety Equipment", price: 350, originalPrice: 420, rating: 4.4, image: "/images/products/product-14.jpg", description: "Waterproof apron for industrial cleaning" },
-  { id: 15, name: "Safety Shoes", category: "Safety Equipment", price: 1200, originalPrice: 1500, rating: 4.8, image: "/images/products/product-15.jpg", description: "Anti-slip safety shoes for workers" },
-
-  { id: 16, name: "Vacuum Cleaner Industrial", category: "Machines", price: 8500, originalPrice: 10000, rating: 4.9, image: "/images/products/product-16.jpg", description: "Heavy-duty vacuum cleaner for office cleaning" },
-  { id: 17, name: "Pressure Washer Machine", category: "Machines", price: 12500, originalPrice: 15000, rating: 4.7, image: "/images/products/product-17.jpg", description: "High-pressure water cleaning machine" },
-  { id: 18, name: "Floor Scrubber Machine", category: "Machines", price: 28500, originalPrice: 32000, rating: 4.8, image: "/images/products/product-18.jpg", description: "Automatic floor scrubbing equipment" },
-  { id: 19, name: "Steam Cleaning Machine", category: "Machines", price: 9500, originalPrice: 11000, rating: 4.6, image: "/images/products/product-19.jpg", description: "High-temperature steam cleaning equipment" },
-  { id: 20, name: "Carpet Cleaning Machine", category: "Machines", price: 18500, originalPrice: 22000, rating: 4.9, image: "/images/products/product-20.jpg", description: "Professional carpet shampoo cleaning machine", badge: "Premium" },
-
-  { id: 21, name: "Home Deep Cleaning", category: "Cleaning Service", price: 2999, originalPrice: 3500, rating: 4.9, image: "/images/products/product-21.jpg", description: "Complete home cleaning service" },
-  { id: 22, name: "Office Cleaning Package", category: "Cleaning Service", price: 4999, originalPrice: 6000, rating: 4.8, image: "/images/products/product-22.jpg", description: "Office cleaning and sanitization" },
-  { id: 23, name: "School Cleaning Service", category: "Cleaning Service", price: 7999, originalPrice: 9500, rating: 4.7, image: "/images/products/product-23.jpg", description: "Classroom and campus cleaning service" },
-  { id: 24, name: "Hospital Sanitization", category: "Cleaning Service", price: 9999, originalPrice: 12000, rating: 4.9, image: "/images/products/product-24.jpg", description: "Medical-grade sanitization service" },
-  { id: 25, name: "Petrol Pump Cleaning", category: "Cleaning Service", price: 6999, originalPrice: 8500, rating: 4.6, image: "/images/products/product-25.jpg", description: "Fuel station deep cleaning package" },
-];
+import { productCategories as categories, productsData as products } from "@/data/products";
 
 export default function Products() {
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
