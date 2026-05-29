@@ -208,14 +208,18 @@ export default function AdminInvoices() {
   </style>
 </head>
 <body>
-  <div className="invoice-card">
+    <div className="invoice-card">
     <div className="header">
-      <div className="logo-container">
-        <span className="logo-text">GREEN TAG Solutions</span>
+      <div className="logo-container" style="display: flex; align-items: center; gap: 12px;">
+        <img src="${window.location.origin}/images/logo.png" alt="Logo" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;" />
+        <div style="text-align: left;">
+          <span className="logo-text" style="font-size: 20px; font-weight: 800; color: #059669; display: block; line-height: 1; margin: 0;">GREEN TAG</span>
+          <span style="font-size: 11px; font-weight: 700; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 2px;">Solutions</span>
+        </div>
       </div>
       <div className="company-details">
-        <p style="margin:0 0 5px 0; font-weight:700; color:#0f172a;">Green Tag Solutions Kerala</p>
-        <p style="margin:0;">Kochi, Kerala, India</p>
+        <p style="margin:0 0 5px 0; font-weight:700; color:#0f172a;">Green Tag Solutions Calicut</p>
+        <p style="margin:0;">Calicut, Kerala, India</p>
         <p style="margin:3px 0 0 0;">GSTIN: 32AAAAA1111A1Z1</p>
         <p style="margin:3px 0 0 0;">Support: +91 98765 43210 | info@greentag.com</p>
       </div>

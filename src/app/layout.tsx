@@ -29,7 +29,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   "name": "Green Tag Solutions",
-  "image": "https://greentagsolutions.com/images/logo.jpeg",
+  "image": "https://greentagsolutions.com/images/logo.png",
   "@id": "https://greentagsolutions.com/#organization",
   "url": "https://greentagsolutions.com",
   "telephone": "+919876543210",
