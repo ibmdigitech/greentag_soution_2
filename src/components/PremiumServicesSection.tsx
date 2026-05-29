@@ -183,7 +183,7 @@ export default function PremiumServicesSection() {
 
                     <div className="flex gap-3">
                       <Link
-                        href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
+                        href="/services"
                         className="flex-1 text-center py-2.5 border border-primary-600 text-primary-600 dark:border-primary-500 dark:text-primary-400 font-medium rounded-lg hover:bg-primary-50 dark:hover:bg-primary-950/20 transition text-sm"
                       >
                         Learn More
