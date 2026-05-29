@@ -1,0 +1,23 @@
+{
+  "skill_name": "react-frontend-helper",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a React component for a product card that displays product image, title, price, and an 'Add to Cart' button. The component should be reusable and accept props for all these values.",
+      "expected_output": "A functional React component that accepts props for image, title, price, and onClick handler, and renders a product card with proper styling considerations.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Implement a custom React hook for fetching data from an API that handles loading states, error states, and automatically aborts requests when the component unmounts.",
+      "expected_output": "A custom useFetch hook that manages data, loading, and error states with proper cleanup using AbortController or similar mechanism.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Create a React component that uses useState and useEffect to implement a simple counter with increment, decrement, and reset buttons. Include proper TypeScript typings.",
+      "expected_output": "A counter component with state management using useState, effect cleanup considerations, and TypeScript interfaces for props and state.",
+      "files": []
+    }
+  ]
+}
