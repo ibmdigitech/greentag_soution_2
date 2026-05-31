@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm install --prefix green-tag-solutions/frontend && npm run build --prefix green-tag-solutions/frontend",
+  "outputDirectory": "green-tag-solutions/frontend/.next",
+  "installCommand": "echo 'skipping root install'"
+}
