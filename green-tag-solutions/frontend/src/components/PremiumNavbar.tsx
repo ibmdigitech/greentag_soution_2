@@ -82,7 +82,7 @@ export default function PremiumNavbar() {
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
-                <Image src="/images/logo.png" alt="Green Tag Solutions" width={48} height={48} className="rounded-full w-12 h-12 transition-transform group-hover:scale-110" />
+                <Image src="/images/logo.jpeg" alt="Green Tag Solutions" width={48} height={48} className="rounded-full w-12 h-12 transition-transform group-hover:scale-110" />
                 <motion.div
                   className="absolute inset-0 rounded-full bg-primary-600 opacity-0 group-hover:opacity-20"
                   animate={{ scale: [1, 1.2, 1] }}

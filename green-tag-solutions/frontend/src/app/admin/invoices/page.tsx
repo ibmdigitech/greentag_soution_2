@@ -17,7 +17,7 @@ export default function AdminInvoices() {
     // Fetch logo and convert to base64 so it embeds in the offline HTML blob
     let logoBase64 = "";
     try {
-      const res = await fetch("/images/logo.png");
+      const res = await fetch("/images/logo.jpeg");
       const blob = await res.blob();
       logoBase64 = await new Promise<string>((resolve) => {
         const reader = new FileReader();

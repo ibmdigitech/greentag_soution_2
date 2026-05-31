@@ -1,0 +1,15 @@
+{
+  "name": "greentag-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "green-tag-solutions/frontend"
+  ],
+  "scripts": {
+    "build": "npm run --prefix green-tag-solutions/frontend build",
+    "vercel-build": "npm run --prefix green-tag-solutions/frontend build"
+  },
+  "dependencies": {
+    "next": "16.2.6"
+  }
+}

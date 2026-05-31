@@ -67,7 +67,7 @@ export default function AdminLogin() {
       >
         <div className="relative w-20 h-20 mx-auto mb-6">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.jpeg"
             alt="Green Tag Logo"
             fill
             className="rounded-full object-cover ring-4 ring-primary-500/30"
